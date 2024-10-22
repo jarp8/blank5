@@ -3,7 +3,7 @@
 return [
   "creatorName" => "Pixinvent",
   "creatorUrl" => "https://pixinvent.com",
-  "templateName" => "Materialize",
+  "templateName" => "Blank 5",
   "templateSuffix" => "Materialize - Bootstrap 5 HTML Laravel Admin Template",
   "templateVersion" => "2.0.0",
   "templateFree" => false,
