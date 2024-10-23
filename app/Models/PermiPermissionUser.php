@@ -9,8 +9,15 @@ class PermiPermissionUser extends Model
 {
   use HasFactory;
 
+  protected $table = 'permi_permission_user';
+
   protected $fillable = [
     'permi_permission_id',
     'user_id'
   ];
+
+  public function permiPermissions()
+  {
+    return $this->belongsTo(PermiPermission::class, 'permi_permission_id', 'id');
+  }
 }

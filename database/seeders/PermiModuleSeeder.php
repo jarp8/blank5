@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Permissions\MainStructure;
+use App\Permissions\MenuMainMenu;
 use App\Permissions\PermissionModule;
 use App\Permissions\PermissionPermission;
-// use App\Permissions\StructureItemModule;
+use App\Permissions\StructureItemModule;
 use App\Permissions\StructureItemView;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,20 +21,22 @@ class PermiModuleSeeder extends Seeder
     $this->command->info('Creating modules, permissions and menu');
 
     // Home
-    $home = new StructureItemView(['name' => 'home', 'icon' => '<i class="fa-solid fa-house"></i>']);
+    $home = new StructureItemView(['name' => 'home', 'icon' => 'menu-icon tf-icons ri-home-smile-line']);
 
     // Users
-    // $users = new StructureItemModule([
-    //     'name' => 'Users', 'icon' => '<i class="fa-solid fa-users"></i>', 'sub_modules' => [
-    //         ['name' => 'roles', 'icon' => '<i class="fa-solid fa-user-tie"></i>'],
-    //         ['name' => 'users', 'icon' => '<i class="fa-solid fa-user"></i>'],
-    //     ]
-    // ]);
+    $users = new StructureItemModule([
+      'name' => 'Users',
+      'icon' => 'menu-icon tf-icons ri-group-line',
+      'sub_modules' => [
+        ['name' => 'roles'],
+        ['name' => 'users'],
+      ]
+    ]);
 
     // Main structure
     $structure = new MainStructure([
       $home,
-      // $users,
+      $users,
     ]);
 
     // Modules
@@ -43,5 +46,12 @@ class PermiModuleSeeder extends Seeder
     // Permissions
     $permissions = new PermissionPermission($modules->insertedViewsStructure->castStructure());
     $permissions->insertControllerPermissions();
+
+    // Menu
+    $menu = new MenuMainMenu($modules->insertedStructure->castStructure());
+    $menu->insertMenu();
+
+    // Mensaje de éxito
+    $this->command->info('Modules, permissions and menu created successfully');
   }
 }

@@ -10,6 +10,8 @@ use App\Http\Controllers\authentications\LoginController;
 use App\Http\Controllers\authentications\LogoutController;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 // Guest routes
 Route::middleware('guest')->group(function () {
@@ -20,9 +22,11 @@ Route::middleware('guest')->group(function () {
 
 // Auth routes
 Route::middleware('auth')->group(function () {
-  Route::resource('home', HomeController::class)->only(['index']);
-
   Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+  Route::resource('home', HomeController::class)->only(['index']);
+  Route::resource('roles', RoleController::class);
+  Route::resource('users', UserController::class);
 });
 
 // // Main Page Route

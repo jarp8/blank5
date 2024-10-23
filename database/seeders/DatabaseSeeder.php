@@ -28,8 +28,10 @@ class DatabaseSeeder extends Seeder
 
       PermiModuleTypeSeeder::class,
       PermiFunctionSeeder::class,
-
       PermiModuleSeeder::class,
+
+      PermiPermissionRoleSeeder::class,
+      PermiPermissionsPermiUserSeeder::class,
     ]);
   }
 }

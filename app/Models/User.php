@@ -3,13 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Permissions\Traits\HasMenu;
+use App\Permissions\Traits\HasPermission;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, HasPermission, HasMenu;
 
   /**
    * The attributes that are mass assignable.
@@ -53,5 +56,10 @@ class User extends Authenticatable
   public function permiPermissions()
   {
     return $this->belongsToMany(PermiPermission::class, 'permi_permission_user');
+  }
+
+  public function permiPermissionUser()
+  {
+    return $this->hasMany(PermiPermissionUser::class);
   }
 }

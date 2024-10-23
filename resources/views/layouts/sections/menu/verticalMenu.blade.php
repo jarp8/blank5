@@ -4,7 +4,6 @@
 @endphp
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
   <!-- ! Hide app brand if navbar-full -->
   @if (!isset($navbarFull))
     <div class="app-brand demo">
@@ -53,7 +52,7 @@
                       }
                   }
               } else {
-                  if (str_contains($currentRouteName, $menu->slug) and strpos($currentRouteName, $menu->slug) === 0) {
+                  if ($menu->slug != null and str_contains($currentRouteName, $menu->slug) and strpos($currentRouteName, $menu->slug) === 0) {
                       $activeClass = 'active open';
                   }
               }
@@ -82,5 +81,4 @@
       @endif
     @endforeach
   </ul>
-
 </aside>
