@@ -1,9 +1,16 @@
 <?php
 
+use App\Http\Middleware\AlwaysAcceptJson;
+use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\ValidatePermissionRoute;
+
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\LocaleMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
   ->withRouting(
@@ -13,7 +20,41 @@ return Application::configure(basePath: dirname(__DIR__))
   )
   ->withMiddleware(function (Middleware $middleware) {
     $middleware->web(LocaleMiddleware::class);
+
+    $middleware->alias([
+      'permission' => ValidatePermissionRoute::class,
+    ]);
+
+    $middleware->api(append: [
+      AlwaysAcceptJson::class,
+    ]);
   })
   ->withExceptions(function (Exceptions $exceptions) {
-    //
+    $exceptions->render(function (ValidationException $e, Request $request) {
+      if ($request->expectsJson()) {
+        return response()->json([
+          'status' => false,
+          'message' => $e->getMessage(),
+          'errors' => $e->errors(),
+        ], $e->status);
+      }
+    });
+
+    $exceptions->render(function (QueryException $e, Request $request) {
+      if ($request->ajax()) {
+        return response()->json([
+          'error' => $e->getMessage()
+        ], 422);
+      }
+    });
+
+    $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
+      if ($request->is('api/*')) {
+        return response()->json([
+          'error' => $e->getMessage()
+        ], 405);
+      }
+
+      abort(405);
+    });
   })->create();

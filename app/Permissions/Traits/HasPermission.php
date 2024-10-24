@@ -44,4 +44,10 @@ trait HasPermission
 
     return $uniquePermissions;
   }
+
+  // $permission = 'home.index'
+  public function hasPermission($permission)
+  {
+    return $this->allPermissions()->pluck('permiPermissions')->contains('name', $permission);
+  }
 }

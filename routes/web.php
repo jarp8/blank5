@@ -24,9 +24,12 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
   Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
-  Route::resource('home', HomeController::class)->only(['index']);
-  Route::resource('roles', RoleController::class);
-  Route::resource('users', UserController::class);
+  Route::middleware('permission')->group(function () {
+    Route::resource('home', HomeController::class)->only(['index']);
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+  });
 });
 
 // // Main Page Route
