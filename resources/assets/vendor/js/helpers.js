@@ -258,7 +258,7 @@ const Helpers = {
 
     const newStyle = INLINE_STYLES.replace(/\{navbarHeight\}/gi, navbarHeight).replace(
       /\{footerHeight\}/gi,
-      footerHeight
+      footerHeight,
     )
 
     if (this._curStyle !== newStyle) {
@@ -375,7 +375,7 @@ const Helpers = {
           () => {
             this._addClass('layout-menu-expanded')
           },
-          this._redrawLayoutMenu() ? 5 : 0
+          this._redrawLayoutMenu() ? 5 : 0,
         )
       }
     } else {
@@ -620,7 +620,7 @@ const Helpers = {
           this._triggerWindowEvent('resize')
           this._triggerEvent('toggle')
           this._setMenuHoverState(false)
-        }
+        },
       )
     } else {
       this._addClass('layout-no-transition')
@@ -1117,7 +1117,7 @@ const Helpers = {
           // eslint-disable-next-line no-new
           new PerfectScrollbar(el, {
             wheelPropagation: false,
-            suppressScrollX: true
+            suppressScrollX: true,
           })
         })
       }
@@ -1168,7 +1168,9 @@ const Helpers = {
         })
       })
     })
-  }
+
+    $('.menu-sub .menu-item.active').parents('.menu-sub').parents('li').addClass('active open')
+  },
 }
 
 // *******************************************************************************

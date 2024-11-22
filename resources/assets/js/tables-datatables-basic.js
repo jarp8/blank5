@@ -35,45 +35,45 @@ document.addEventListener('DOMContentLoaded', function (e) {
         basicFullname: {
           validators: {
             notEmpty: {
-              message: 'The name is required'
-            }
-          }
+              message: 'The name is required',
+            },
+          },
         },
         basicPost: {
           validators: {
             notEmpty: {
-              message: 'Post field is required'
-            }
-          }
+              message: 'Post field is required',
+            },
+          },
         },
         basicEmail: {
           validators: {
             notEmpty: {
-              message: 'The Email is required'
+              message: 'The Email is required',
             },
             emailAddress: {
-              message: 'The value is not a valid email address'
-            }
-          }
+              message: 'The value is not a valid email address',
+            },
+          },
         },
         basicDate: {
           validators: {
             notEmpty: {
-              message: 'Joining Date is required'
+              message: 'Joining Date is required',
             },
             date: {
               format: 'MM/DD/YYYY',
-              message: 'The value is not a valid date'
-            }
-          }
+              message: 'The value is not a valid date',
+            },
+          },
         },
         basicSalary: {
           validators: {
             notEmpty: {
-              message: 'Basic Salary is required'
-            }
-          }
-        }
+              message: 'Basic Salary is required',
+            },
+          },
+        },
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
           // Use this for enabling/changing valid/invalid class
           // eleInvalidClass: '',
           eleValidClass: '',
-          rowSelector: '.col-sm-12'
+          rowSelector: '.col-sm-12',
         }),
         submitButton: new FormValidation.plugins.SubmitButton(),
         // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-        autoFocus: new FormValidation.plugins.AutoFocus()
+        autoFocus: new FormValidation.plugins.AutoFocus(),
       },
       init: instance => {
         instance.on('plugins.message.placed', function (e) {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
           }
         });
-      }
+      },
     });
 
     // FlatPickr Initialization & Validation
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         // After selecting a date, we need to revalidate the field
         onChange: function () {
           fv.revalidateField('basicDate');
-        }
+        },
       });
     }
   })();
@@ -126,7 +126,7 @@ $(function () {
 
   if (dt_basic_table.length) {
     dt_basic = dt_basic_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
+      // ajax: assetsPath + 'json/table-datatable.json',
       columns: [
         { data: '' },
         { data: 'id' },
@@ -136,7 +136,7 @@ $(function () {
         { data: 'start_date' },
         { data: 'salary' },
         { data: 'status' },
-        { data: '' }
+        { data: '' },
       ],
       columnDefs: [
         {
@@ -148,7 +148,7 @@ $(function () {
           targets: 0,
           render: function (data, type, full, meta) {
             return '';
-          }
+          },
         },
         {
           // For Checkboxes
@@ -161,13 +161,13 @@ $(function () {
             return '<input type="checkbox" class="dt-checkboxes form-check-input">';
           },
           checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          }
+            selectAllRender: '<input type="checkbox" class="form-check-input">',
+          },
         },
         {
           targets: 2,
           searchable: false,
-          visible: false
+          visible: false,
         },
         {
           // Avatar image/badge, Name and post
@@ -209,11 +209,11 @@ $(function () {
               '</div>' +
               '</div>';
             return $row_output;
-          }
+          },
         },
         {
           responsivePriority: 1,
-          targets: 4
+          targets: 4,
         },
         {
           // Label
@@ -225,7 +225,7 @@ $(function () {
               2: { title: 'Professional', class: ' bg-label-success' },
               3: { title: 'Rejected', class: ' bg-label-danger' },
               4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              5: { title: 'Applied', class: ' bg-label-info' },
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -237,7 +237,7 @@ $(function () {
               $status[$status_number].title +
               '</span>'
             );
-          }
+          },
         },
         {
           // Actions
@@ -258,8 +258,8 @@ $(function () {
               '</div>' +
               '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="ri-edit-box-line"></i></a>'
             );
-          }
-        }
+          },
+        },
       ],
       order: [[2, 'desc']],
       dom: '<"card-header flex-column flex-md-row border-bottom"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6 mt-5 mt-md-0"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -268,8 +268,8 @@ $(function () {
       language: {
         paginate: {
           next: '<i class="ri-arrow-right-s-line"></i>',
-          previous: '<i class="ri-arrow-left-s-line"></i>'
-        }
+          previous: '<i class="ri-arrow-left-s-line"></i>',
+        },
       },
       buttons: [
         {
@@ -297,8 +297,8 @@ $(function () {
                       } else result = result + item.innerText;
                     });
                     return result;
-                  }
-                }
+                  },
+                },
               },
               customize: function (win) {
                 //customize print view for dark
@@ -312,7 +312,7 @@ $(function () {
                   .css('color', 'inherit')
                   .css('border-color', 'inherit')
                   .css('background-color', 'inherit');
-              }
+              },
             },
             {
               extend: 'csv',
@@ -334,9 +334,9 @@ $(function () {
                       } else result = result + item.innerText;
                     });
                     return result;
-                  }
-                }
-              }
+                  },
+                },
+              },
             },
             {
               extend: 'excel',
@@ -358,9 +358,9 @@ $(function () {
                       } else result = result + item.innerText;
                     });
                     return result;
-                  }
-                }
-              }
+                  },
+                },
+              },
             },
             {
               extend: 'pdf',
@@ -382,9 +382,9 @@ $(function () {
                       } else result = result + item.innerText;
                     });
                     return result;
-                  }
-                }
-              }
+                  },
+                },
+              },
             },
             {
               extend: 'copy',
@@ -406,16 +406,16 @@ $(function () {
                       } else result = result + item.innerText;
                     });
                     return result;
-                  }
-                }
-              }
-            }
-          ]
+                  },
+                },
+              },
+            },
+          ],
         },
         {
           text: '<i class="ri-add-line ri-16px me-sm-2"></i> <span class="d-none d-sm-inline-block">Add New Record</span>',
-          className: 'create-new btn btn-primary waves-effect waves-light'
-        }
+          className: 'create-new btn btn-primary waves-effect waves-light',
+        },
       ],
       responsive: {
         details: {
@@ -423,7 +423,7 @@ $(function () {
             header: function (row) {
               var data = row.data();
               return 'Details of ' + data['full_name'];
-            }
+            },
           }),
           type: 'column',
           renderer: function (api, rowIdx, columns) {
@@ -446,9 +446,9 @@ $(function () {
             }).join('');
 
             return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
+          },
+        },
+      },
     });
     $('div.head-label').html('<h5 class="card-title mb-0">DataTable with Buttons</h5>');
   }
@@ -473,7 +473,7 @@ $(function () {
           email: $new_email,
           start_date: $new_date,
           salary: '$' + $new_salary,
-          status: 5
+          status: 5,
         })
         .draw();
       count++;
@@ -501,7 +501,7 @@ $(function () {
         { data: 'post' },
         { data: 'salary' },
         { data: 'status' },
-        { data: '' }
+        { data: '' },
       ],
       columnDefs: [
         {
@@ -514,7 +514,7 @@ $(function () {
               2: { title: 'Professional', class: ' bg-label-success' },
               3: { title: 'Rejected', class: ' bg-label-danger' },
               4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              5: { title: 'Applied', class: ' bg-label-info' },
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -526,7 +526,7 @@ $(function () {
               $status[$status_number].title +
               '</span>'
             );
-          }
+          },
         },
         {
           // Actions
@@ -546,8 +546,8 @@ $(function () {
               '</div>' +
               '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="ri-edit-box-line"></i></a>'
             );
-          }
-        }
+          },
+        },
       ],
       dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
@@ -555,9 +555,9 @@ $(function () {
       language: {
         paginate: {
           next: '<i class="ri-arrow-right-s-line"></i>',
-          previous: '<i class="ri-arrow-left-s-line"></i>'
-        }
-      }
+          previous: '<i class="ri-arrow-left-s-line"></i>',
+        },
+      },
     });
   }
 
@@ -577,7 +577,7 @@ $(function () {
         { data: 'start_date' },
         { data: 'salary' },
         { data: 'status' },
-        { data: '' }
+        { data: '' },
       ],
       columnDefs: [
         {
@@ -588,7 +588,7 @@ $(function () {
           searchable: false,
           render: function (data, type, full, meta) {
             return '';
-          }
+          },
         },
         { visible: false, targets: groupColumn },
         {
@@ -601,7 +601,7 @@ $(function () {
               2: { title: 'Professional', class: ' bg-label-success' },
               3: { title: 'Rejected', class: ' bg-label-danger' },
               4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              5: { title: 'Applied', class: ' bg-label-info' },
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -613,7 +613,7 @@ $(function () {
               $status[$status_number].title +
               '</span>'
             );
-          }
+          },
         },
         {
           // Actions
@@ -634,8 +634,8 @@ $(function () {
               '</div>' +
               '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="ri-edit-box-line"></i></a>'
             );
-          }
-        }
+          },
+        },
       ],
       order: [[groupColumn, 'asc']],
       dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -644,8 +644,8 @@ $(function () {
       language: {
         paginate: {
           next: '<i class="ri-arrow-right-s-line"></i>',
-          previous: '<i class="ri-arrow-left-s-line"></i>'
-        }
+          previous: '<i class="ri-arrow-left-s-line"></i>',
+        },
       },
       drawCallback: function (settings) {
         var api = this.api();
@@ -671,7 +671,7 @@ $(function () {
             header: function (row) {
               var data = row.data();
               return 'Details of ' + data['full_name'];
-            }
+            },
           }),
           type: 'column',
           renderer: function (api, rowIdx, columns) {
@@ -694,9 +694,9 @@ $(function () {
             }).join('');
 
             return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     // Order by the grouping
@@ -725,7 +725,7 @@ $(function () {
         { data: 'start_date' },
         { data: 'salary' },
         { data: 'status' },
-        { data: '' }
+        { data: '' },
       ],
       columnDefs: [
         {
@@ -736,7 +736,7 @@ $(function () {
           searchable: false,
           render: function (data, type, full, meta) {
             return '';
-          }
+          },
         },
         {
           // Label
@@ -748,7 +748,7 @@ $(function () {
               2: { title: 'Professional', class: ' bg-label-success' },
               3: { title: 'Rejected', class: ' bg-label-danger' },
               4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              5: { title: 'Applied', class: ' bg-label-info' },
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -760,7 +760,7 @@ $(function () {
               $status[$status_number].title +
               '</span>'
             );
-          }
+          },
         },
         {
           // Actions
@@ -781,15 +781,15 @@ $(function () {
               '</div>' +
               '<a href="javascript:;" class="btn btn-sm btn-text-secondary rounded-pill btn-icon item-edit"><i class="ri-edit-box-line"></i></a>'
             );
-          }
-        }
+          },
+        },
       ],
       language: {
         url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/' + lang + '.json',
         paginate: {
           next: '<i class="ri-arrow-right-s-line"></i>',
-          previous: '<i class="ri-arrow-left-s-line"></i>'
-        }
+          previous: '<i class="ri-arrow-left-s-line"></i>',
+        },
       },
       order: [[2, 'desc']],
       displayLength: 7,
@@ -801,7 +801,7 @@ $(function () {
             header: function (row) {
               var data = row.data();
               return 'Details of ' + data['full_name'];
-            }
+            },
           }),
           type: 'column',
           renderer: function (api, rowIdx, columns) {
@@ -824,9 +824,9 @@ $(function () {
             }).join('');
 
             return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 });

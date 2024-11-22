@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
       $active = $configData["layout"] === 'vertical' ? 'active open':'active';
       $currentRouteName =  Route::currentRouteName();
 
+      if (explode('.', Route::currentRouteName())[0] ==  $submenu->name) {
+        $activeClass = 'active';
+      }
+
       if ($currentRouteName === $submenu->slug) {
-          $activeClass = 'active';
+        $activeClass = 'active';
       }
       elseif (isset($submenu->submenu)) {
         if (gettype($submenu->slug) === 'array') {
