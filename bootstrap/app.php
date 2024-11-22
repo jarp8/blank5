@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AlwaysAcceptJson;
+use App\Http\Middleware\GatePermissions;
 use App\Http\Middleware\LocaleMiddleware;
 use App\Http\Middleware\ValidatePermissionRoute;
 
@@ -11,6 +12,8 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
   ->withRouting(
@@ -23,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
     $middleware->alias([
       'permission' => ValidatePermissionRoute::class,
+      'permission.gate' => GatePermissions::class,
     ]);
 
     $middleware->api(append: [
@@ -54,7 +58,5 @@ return Application::configure(basePath: dirname(__DIR__))
           'error' => $e->getMessage()
         ], 405);
       }
-
-      abort(405);
     });
   })->create();

@@ -13,9 +13,9 @@ class PermiPermissionsPermiUserSeeder extends Seeder
    */
   public function run(): void
   {
-    PermiPermissionUser::create([
-      'permi_permission_id' => 1,
-      'user_id' => 1
-    ]);
+    // PermiPermissionUser::create([
+    //   'permi_permission_id' => 1,
+    //   'user_id' => 1
+    // ]);
   }
 }

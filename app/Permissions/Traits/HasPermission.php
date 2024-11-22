@@ -7,12 +7,14 @@ trait HasPermission
   public function getUserPermissions()
   {
     $user = $this->with([
-      'permiPermissionUser.permiPermissions' => function ($query) {
-        $query->whereHas('permiModule', function ($q) {
+      'permiPermissionUser' => function ($query) {
+        $query->whereHas('permiPermissions.permiModule', function ($q) {
           $q->where('is_active', 1);
-        });
+        })->with(['permiPermissions']);
       },
-    ])->first();
+    ])
+      ->where('id', $this->id)
+      ->first();
 
     return $user->permiPermissionUser;
   }
@@ -20,12 +22,14 @@ trait HasPermission
   public function getRolesPermissions()
   {
     $user = $this->with([
-      'roles.permiPermissionRole.permiPermissions' => function ($query) {
-        $query->whereHas('permiModule', function ($q) {
+      'roles.permiPermissionRole' => function ($query) {
+        $query->whereHas('permiPermissions.permiModule', function ($q) {
           $q->where('is_active', 1);
-        });
+        })->with(['permiPermissions']);
       },
-    ])->first();
+    ])
+      ->where('id', $this->id)
+      ->first();
 
     return $user->roles->pluck('permiPermissionRole')->flatten(1);
   }

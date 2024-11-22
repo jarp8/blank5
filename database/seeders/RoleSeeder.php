@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
     Role::firstOrCreate([
       'name' => 'General user',
       'description' => null,
-      'login_web' => 1,
+      'login_web' => 0,
       'login_app' => 0,
     ]);
   }

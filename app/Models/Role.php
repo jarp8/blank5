@@ -14,7 +14,19 @@ class Role extends Model
     'description',
     'login_web',
     'login_app',
+    'created_at',
+    'updated_at',
   ];
+
+  public function getLoginWebStatusAttribute()
+  {
+    return $this->login_web ? __('Enabled') : __('Disabled');
+  }
+
+  public function getLoginAppStatusAttribute()
+  {
+    return $this->login_app ? __('Enabled') : __('Disabled');
+  }
 
   public function user()
   {

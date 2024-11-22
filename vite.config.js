@@ -47,7 +47,7 @@ function libsWindowAssignment() {
       } else if (id.includes('vfs_fonts')) {
         return src.replaceAll('this.pdfMake', 'window.pdfMake');
       }
-    }
+    },
   };
 }
 
@@ -58,6 +58,10 @@ export default defineConfig({
         'resources/css/app.css',
         'resources/assets/css/demo.css',
         'resources/js/app.js',
+        // datatable
+        'resources/js/datatable/delete.js',
+        // permissions
+        'resources/js/permissions.js',
         ...pageJsFiles,
         ...vendorJsFiles,
         ...LibsJsFiles,
@@ -65,11 +69,11 @@ export default defineConfig({
         ...CoreScssFiles,
         ...LibsScssFiles,
         ...LibsCssFiles,
-        ...FontsScssFiles
+        ...FontsScssFiles,
       ],
-      refresh: true
+      refresh: true,
     }),
     html(),
-    libsWindowAssignment()
-  ]
+    libsWindowAssignment(),
+  ],
 });

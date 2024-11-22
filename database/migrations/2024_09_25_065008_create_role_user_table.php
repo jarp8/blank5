@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('role_user', function (Blueprint $table) {
       $table->id();
       $table->foreignId('role_id')->comment('Llave foránea de roles')->constrained();
-      $table->foreignId('user_id')->comment('Llave foránea de users')->constrained();
+      $table->foreignId('user_id')->comment('Llave foránea de users')->constrained()->cascadeOnDelete();
       $table->timestamps();
     });
   }

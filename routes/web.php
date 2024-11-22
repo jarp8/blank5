@@ -24,10 +24,18 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
   Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
-  Route::middleware('permission')->group(function () {
+  Route::middleware(['permission', 'permission.gate'])->group(function () {
+    // Home
     Route::resource('home', HomeController::class)->only(['index']);
 
+    // Roles
+    Route::get('roles/{role}/permissions', [RoleController::class, 'permissions'])->name('roles.permissions');
+    Route::post('roles/{role}/permissions', [RoleController::class, 'storePermissions'])->name('roles.storepermissions');
     Route::resource('roles', RoleController::class);
+
+    // Users
+    Route::get('users/{user}/permissions', [UserController::class, 'permissions'])->name('users.permissions');
+    Route::post('users/{user}/permissions', [UserController::class, 'storePermissions'])->name('users.storepermissions');
     Route::resource('users', UserController::class);
   });
 });
