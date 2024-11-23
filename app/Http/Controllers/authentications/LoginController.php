@@ -31,7 +31,7 @@ class LoginController extends Controller
     }, $request->remember ?? false)) {
       return back()
         ->withInput()
-        ->with('credentials', 'Invalid credentials. Please check your email and password and try again.');
+        ->with('credentials', __('Invalid credentials. Please check your email and password and try again.'));
     }
 
     $request->session()->regenerate();
