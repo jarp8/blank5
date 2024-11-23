@@ -19,7 +19,7 @@ class ValidatePermissionRoute
       if ($request->expectsJson() || $request->ajax()) {
         return response()->json([
           'status' => false,
-          'message' => 'This action is unauthorized'
+          'message' => __('This action is unauthorized'),
         ], 401);
       } else {
         return redirect('home');

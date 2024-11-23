@@ -20,6 +20,12 @@ class PermiModuleSeeder extends Seeder
   {
     $this->command->info('Creating modules, permissions and menu');
 
+    // Materialize Theme:
+    // https://demos.pixinvent.com/materialize-html-laravel-admin-template/demo-1/
+
+    // Icons:
+    // https://remixicon.com/
+
     // Home
     $home = new StructureItemView(['name' => 'home', 'icon' => 'menu-icon tf-icons ri-home-smile-line']);
 
