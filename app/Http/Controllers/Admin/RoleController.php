@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\DataTables\RolesDataTable;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Models\PermiModule;
 use App\Models\Role;
@@ -33,7 +34,7 @@ class RoleController extends Controller
   {
     $role = Role::create($request->all());
 
-    return redirect()->route('roles.permissions', $role)->with('status', ['message' => __('Role created successfully')]);
+    return redirect()->route('admin.roles.permissions', $role)->with('status', ['message' => __('Role created successfully')]);
   }
 
   /**
@@ -59,7 +60,7 @@ class RoleController extends Controller
   {
     $role->update($request->all());
 
-    return redirect()->route('roles.index')->with('status', ['message' => __('Role updated successfully')]);
+    return redirect()->route('admin.roles.index')->with('status', ['message' => __('Role updated successfully')]);
   }
 
   /**
@@ -88,7 +89,7 @@ class RoleController extends Controller
     $rolePermissions = $role->permiPermissionRole;
 
     $title = __('Role permissions');
-    $route = route('roles.storepermissions', $role);
+    $route = route('admin.roles.storepermissions', $role);
 
     return view('content.permissions.create', compact(
       'modules',
@@ -108,6 +109,6 @@ class RoleController extends Controller
       'updated_at' => date("Y-m-d H:i:s"),
     ]);
 
-    return redirect()->route('roles.index')->with('status', ['message' => __('Role permissions created successfully.')]);
+    return redirect()->route('admin.roles.index')->with('status', ['message' => __('Role permissions created successfully.')]);
   }
 }

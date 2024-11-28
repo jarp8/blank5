@@ -15,9 +15,18 @@ use Yajra\DataTables\Services\DataTable;
 
 abstract class BlankDataTable extends DataTable
 {
-  protected string $table;
+  protected string $module;
+
   protected string $title;
+
   protected bool $includeActions = true;
+
+  private string $moduleNameFormatted;
+
+  public function __construct()
+  {
+    $this->moduleNameFormatted = str_replace('.', '-', $this->module) . '-table';
+  }
 
   /**
    * Build the DataTable class.
@@ -40,7 +49,7 @@ abstract class BlankDataTable extends DataTable
   public function html(): HtmlBuilder
   {
     return $this->builder()
-      ->setTableId("{$this->table}-table")
+      ->setTableId($this->moduleNameFormatted)
       ->columns($this->getColumns())
       ->responsive(true)
       ->minifiedAjax()
@@ -80,10 +89,10 @@ abstract class BlankDataTable extends DataTable
   {
     $actions = [];
 
-    if (Gate::allows("{$this->table}.edit")) {
+    if (Gate::allows("{$this->module}.edit")) {
       $actions['buttons'][] = [
         'attributes' => [
-          'href' => route("{$this->table}.edit", $row->id),
+          'href' => route("{$this->module}.edit", $row->id),
           'class' => 'update-action-datatable',
           'title' => __('Edit'),
         ],
@@ -91,10 +100,10 @@ abstract class BlankDataTable extends DataTable
       ];
     }
 
-    if (Gate::allows("{$this->table}.destroy")) {
+    if (Gate::allows("{$this->module}.destroy")) {
       $actions['buttons'][] = [
         'attributes' => [
-          'href' => route("{$this->table}.destroy", $row->id),
+          'href' => route("{$this->module}.destroy", $row->id),
           'class' => 'delete-action-datatable',
           'title' => __('Delete'),
         ],
@@ -122,11 +131,13 @@ abstract class BlankDataTable extends DataTable
   {
     $translatedTitle = __($this->title);
 
+    $table = $this->moduleNameFormatted;
+
     return [
       'initComplete' => "function() {
-          $('div.{$this->table}-table-head-label').html('<h5 class=\"card-title mb-0\">{$translatedTitle}</h5>');
+          $('div.{$table}-table-head-label').html('<h5 class=\"card-title mb-0\">{$translatedTitle}</h5>');
       }",
-      'dom' => '<"card-header flex-column flex-md-row border-bottom"<"' . $this->table . '-table-head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6 mt-5 mt-md-0"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      'dom' => '<"card-header flex-column flex-md-row border-bottom"<"' . $table . '-table-head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6 mt-5 mt-md-0"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       'displayLength' => 7,
       'lengthMenu' => [7, 10, 25, 50, 75, 100],
       'language' => [
@@ -153,12 +164,12 @@ abstract class BlankDataTable extends DataTable
       ],
     ];
 
-    if (Gate::allows("{$this->table}.create")) {
+    if (Gate::allows("{$this->module}.create")) {
       $buttons[] = [
         'text' => '<i class="ri-add-line ri-16px me-sm-2"></i><span class="d-none d-sm-inline-block">Add New Record</span>',
         'className' => 'create-new btn btn-primary waves-effect waves-light',
         'action' => "function () {
-            window.location.href = '" . route("{$this->table}.create") . "';
+            window.location.href = '" . route("{$this->module}.create") . "';
         }",
       ];
     }
@@ -185,6 +196,6 @@ abstract class BlankDataTable extends DataTable
    */
   protected function filename(): string
   {
-    return "{$this->table}_" . now()->format('YmdHis');
+    return "{$this->module}_" . now()->format('YmdHis');
   }
 }

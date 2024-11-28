@@ -7,7 +7,6 @@
         id="name"
         name="name"
         class="form-control @error('name') is-invalid @enderror"
-        placeholder="{{ __('Admin') }}"
         aria-describedby="validationName"
         value="{{ old('name', $role->name ?? '') }}"
         required />

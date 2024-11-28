@@ -20,9 +20,9 @@ class ValidatePermissionRoute
         return response()->json([
           'status' => false,
           'message' => __('This action is unauthorized'),
-        ], 401);
+        ], 403);
       } else {
-        return redirect('home');
+        abort(403);
       }
     }
 

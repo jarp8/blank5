@@ -3,7 +3,7 @@
     $name = $module->name;
   @endphp
   @if ($module->permi_module_id == null || $module->permi_module_type_id == 1)
-    <h6 class="text-capitalize mb-1">{{ $name }}</h6>
+    <h6 class="text-capitalize mb-1">{{ __($name) }}</h6>
   @endif
 
   @if ($module->allSubModules->isNotEmpty())
@@ -28,7 +28,7 @@
             data-bs-target="#{{ $name }}collapseDeliveryOptions"
             aria-expanded="false"
             aria-controls="{{ $name }}collapseDeliveryOptions">
-            <span class="ps-3">{{ $name }}</span>
+            <span class="ps-3">{{ __($name) }}</span>
           </button>
         </div>
 

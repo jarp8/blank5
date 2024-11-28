@@ -26,22 +26,22 @@ class PermiModuleSeeder extends Seeder
     // Icons:
     // https://remixicon.com/
 
-    // Home
-    $home = new StructureItemView(['name' => 'home', 'icon' => 'menu-icon tf-icons ri-home-smile-line']);
+    // Dashboard
+    $dashboard = new StructureItemView(['name' => 'admin.dashboard', 'icon' => 'menu-icon tf-icons ri-home-smile-line']);
 
     // Users
     $users = new StructureItemModule([
-      'name' => 'Users',
+      'name' => 'admin.users',
       'icon' => 'menu-icon tf-icons ri-group-line',
       'sub_modules' => [
-        ['name' => 'roles'],
-        ['name' => 'users'],
+        ['name' => 'admin.roles'],
+        ['name' => 'admin.users'],
       ]
     ]);
 
     // Main structure
     $structure = new MainStructure([
-      $home,
+      $dashboard,
       $users,
     ]);
 

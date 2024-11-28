@@ -15,7 +15,7 @@
 
   <div class="card">
     <div class="card-header header-elements">
-      <h5 class="mb-0 text-capitalize">{{ $title ?? __('Permissions by module') }}</h5>
+      <h5 class="mb-0 text-capitalize">{{ __($title) ?? __('Permissions by module') }}</h5>
     </div>
     <div class="card-body">
       <form id="create-permissions" action="{{ $route }}" method="POST">

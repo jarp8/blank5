@@ -32,14 +32,14 @@
       <h5 class="mb-0 text-capitalize">{{ __('Create new user') }}</h5>
     </div>
     <div class="card-body">
-      <form id="create-users" action="{{ route('users.store') }}" method="POST">
+      <form id="create-users" action="{{ route('admin.users.store') }}" method="POST">
         @csrf
         @include('content.users.fields')
       </form>
     </div>
     <div class="card-footer">
       <div class="d-flex gap-4">
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
         <button type="submit" class="btn btn-primary" form="create-users">{{ __('Save') }}</button>
       </div>
     </div>

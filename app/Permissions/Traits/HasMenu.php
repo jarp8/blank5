@@ -32,7 +32,7 @@ trait HasMenu
       if (empty($menuMain['all_active_submenus'])) {
         if ($permissions->contains('permi_permission_id', $menuMain['permi_permission_id'] ?? null)) {
           $result[] = [
-            'url'   => strtolower($menuMain['name']),
+            'url'   => str_replace('.', '/', strtolower($menuMain['name'])),
             'name'  => $menuMain['name'],
             'icon'  => $menuMain['icon'],
             'slug'  => strtolower($menuMain['name']) . '.index',

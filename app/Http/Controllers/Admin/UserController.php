@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\PermiModule;
 use App\Models\Role;
@@ -39,7 +40,7 @@ class UserController extends Controller
 
     $user->roles()->sync($request->roles);
 
-    return redirect()->route('users.permissions', $user)->with('status', ['message' => __('User created successfully')]);
+    return redirect()->route('admin.users.permissions', $user)->with('status', ['message' => __('User created successfully')]);
   }
 
   /**
@@ -71,7 +72,7 @@ class UserController extends Controller
 
     $user->roles()->sync($request->roles);
 
-    return redirect()->route('users.index')->with('status', ['message' => __('User updated successfully')]);
+    return redirect()->route('admin.users.index')->with('status', ['message' => __('User updated successfully')]);
   }
 
   /**
@@ -101,7 +102,7 @@ class UserController extends Controller
     $userPermissions = $user->getUserPermissions();
 
     $title = __('User permissions');
-    $route = route('users.storepermissions', $user);
+    $route = route('admin.users.storepermissions', $user);
 
     return view('content.permissions.create', compact(
       'modules',
@@ -122,6 +123,6 @@ class UserController extends Controller
       'updated_at' => date("Y-m-d H:i:s"),
     ]);
 
-    return redirect()->route('users.index')->with('status', ['message' => __('User permissions created successfully.')]);
+    return redirect()->route('admin.users.index')->with('status', ['message' => __('User permissions created successfully.')]);
   }
 }

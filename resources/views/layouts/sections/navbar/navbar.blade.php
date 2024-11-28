@@ -183,21 +183,21 @@
         @if (Auth::check())
           <li>
             <div class="d-grid px-4 pt-2 pb-1">
-              <a class="btn btn-sm btn-danger d-flex" href="{{ route('logout') }}"
+              <a class="btn btn-sm btn-danger d-flex" href="{{ route('admin.logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <small class="align-middle">Logout</small>
                 <i class="ri-logout-box-r-line ms-2 ri-16px"></i>
               </a>
             </div>
           </li>
-          <form method="POST" id="logout-form" action="{{ route('logout') }}">
+          <form method="POST" id="logout-form" action="{{ route('admin.logout') }}">
             @csrf
           </form>
         @else
           <li>
             <div class="d-grid px-4 pt-2 pb-1">
               <a class="btn btn-sm btn-danger d-flex"
-                href="{{ Route::has('login') ? route('login') : url('auth/login-basic') }}">
+                href="{{ Route::has('login') ? route('admin.login') : url('auth/login-basic') }}">
                 <small class="align-middle">Login</small>
                 <i class="ri-logout-box-r-line ms-2 ri-16px"></i>
               </a>

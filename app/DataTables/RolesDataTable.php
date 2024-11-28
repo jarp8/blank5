@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Column;
 
 class RolesDataTable extends BlankDataTable
 {
-  protected string $table = 'roles';
+  protected string $module = 'admin.roles';
   protected string $title = 'Roles';
 
   public function dataTable(QueryBuilder $query): EloquentDataTable
@@ -41,10 +41,10 @@ class RolesDataTable extends BlankDataTable
   {
     $actions = parent::getActions($row);
 
-    if (Gate::allows("{$this->table}.permissions")) {
+    if (Gate::allows("{$this->module}.permissions")) {
       $actions['buttons'][] = [
         'attributes' => [
-          'href' => route("{$this->table}.permissions", $row->id),
+          'href' => route("{$this->module}.permissions", $row->id),
           'title' => __('Permissions'),
         ],
         'slot' => '<i class="ri-key-line"></i>',
