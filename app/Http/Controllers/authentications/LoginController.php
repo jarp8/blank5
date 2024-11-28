@@ -36,6 +36,6 @@ class LoginController extends Controller
 
     $request->session()->regenerate();
 
-    return redirect()->intended('home.index');
+    return redirect()->intended('home');
   }
 }
